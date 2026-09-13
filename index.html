@@ -4,9 +4,11 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Mohit Lovanshi | Frontend Developer Portfolio</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+  <title>Mohit Lovanshi - Developer Portfolio</title>
+  <meta name="description" content="Portfolio website of Mohit Lovanshi, CSE student and full-stack developer showcasing projects with interactive 3D transitions, dynamic tech stacks, real-time GitHub stats, and theme switcher.">
+  <meta property="og:title" content="Mohit Lovanshi - Developer Portfolio">
+  <meta property="og:description" content="Portfolio website of Mohit Lovanshi, CSE student and full-stack developer showcasing projects with interactive 3D transitions, dynamic tech stacks, real-time GitHub stats, and theme switcher.">
+  <meta name="keywords" content="Mohit Lovanshi, portfolio, full-stack developer, frontend developer, web developer, CSE">
 
   <!-- Favicon -->
   <link href="assets/img/profile/mohitinter.png" rel="icon">
@@ -29,6 +31,22 @@
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
 
+  <!-- Theme Preference Early Initialization to prevent Flash of Unstyled Content (FOUC) -->
+  <script>
+    (function () {
+      try {
+        var storedTheme = localStorage.getItem('portfolio_theme_preference');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = storedTheme ? storedTheme : (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark-theme');
+        }
+      } catch (e) {
+        // Fallback silently if localStorage is restricted
+      }
+    })();
+  </script>
 
 </head>
 
@@ -49,20 +67,35 @@
           <li><a href="#about">About</a></li>
           <li><a href="#resume">Resume</a></li>
           <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#space-solar-system" class="nav-space-link"><i class="bi bi-rocket-takeoff text-accent me-1"></i>3D Space</a></li>
           <li class="dropdown"><a href="#"><span>More</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#about">About</a></li>
               <li><a href="#portfolio">Portfolio</a></li>
+              <li><a href="#space-solar-system"><i class="bi bi-rocket-takeoff text-accent me-1"></i>3D Space Solar System</a></li>
               <li><a href="#resume">Resume</a></li>
               <li><a href="#contact">Contact</a></li>
             </ul>
           </li>
           <li><a href="#contact">Contact</a></li>
+          <li class="d-xl-none"><a href="#" class="theme-toggle-nav-link" data-theme-toggle><i class="bi bi-moon-stars me-2"></i> <span class="theme-toggle-label">Switch Theme</span></a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted" href="#about">Get Started</a>
+      <div class="header-actions d-flex align-items-center">
+        <!-- Theme Toggle Button -->
+        <button type="button" id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle theme" title="Switch theme (Shift+D)">
+          <span class="theme-toggle-track">
+            <span class="theme-toggle-thumb">
+              <i class="bi bi-sun-fill icon-sun"></i>
+              <i class="bi bi-moon-stars-fill icon-moon"></i>
+            </span>
+          </span>
+        </button>
+
+        <a class="btn-getstarted" href="#about">Get Started</a>
+      </div>
 
     </div>
   </header>
@@ -502,145 +535,663 @@
             <li data-filter=".filter-development">Development</li>
           </ul>
 
+          <!-- Dynamic Tech Stack Quick-Filter Bar -->
+          <div class="portfolio-tech-filter-bar" id="portfolio-tech-filter-bar" data-aos="fade-up" data-aos-delay="250">
+            <div class="tech-filter-intro">
+              <i class="bi bi-cpu-fill"></i>
+              <span>Filter by Tool / Stack:</span>
+            </div>
+            <div class="tech-filter-chips" id="tech-filter-chips">
+              <!-- Dynamically populated tool filter chips -->
+            </div>
+            <div class="tech-filter-active-indicator" id="tech-filter-active-indicator" style="display: none;">
+              <span class="active-filter-text">Filtered by: <strong id="active-tool-name"></strong></span>
+              <button type="button" class="btn-clear-tool-filter" id="btn-clear-tool-filter" aria-label="Clear tool filter">
+                <i class="bi bi-x-circle-fill"></i> Show All
+              </button>
+            </div>
+          </div>
+
           <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="300">
 
-            <!-- Project 1 -->
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-development">
-              <div class="portfolio-card">
+            <!-- Project 1: Student Career Guide -->
+            <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-development filter-strategy"
+              id="portfolio-item-student-career"
+              data-project-id="student-career-guide"
+              data-project-title="Student Career Guide"
+              data-project-category="Academic Project (SIH)"
+              data-project-year="2024"
+              data-project-desc="Interactive roadmap and career guidance portal helping students navigate higher education roadmaps, skill benchmarks, and engineering specializations."
+              data-demo-url="https://studentcarrier.netlify.app/"
+              data-github-url="https://github.com/MohitLovanshi372"
+              data-tech-stack='[
+                {"name": "HTML5", "category": "Frontend", "role": "Semantic DOM & accessible page layout", "icon": "bi-filetype-html"},
+                {"name": "CSS3", "category": "Styling", "role": "Mobile-first responsive styling & Flexbox", "icon": "bi-filetype-css"},
+                {"name": "JavaScript", "category": "Frontend", "role": "Interactive career roadmap filtering logic", "icon": "bi-filetype-js"},
+                {"name": "Bootstrap 5", "category": "Framework", "role": "Modern UI component framework & grid", "icon": "bi-bootstrap-fill"},
+                {"name": "Netlify", "category": "Cloud / CI-CD", "role": "Automated continuous deployment & edge CDN", "icon": "bi-cloud-check-fill"}
+              ]'>
+              <div class="portfolio-card enhanced-card">
                 <div class="portfolio-image-container">
                   <img src="assets/img/portfolio/study student projectcsntee sih.png" alt="Student Career Guide project"
                     class="img-fluid" loading="lazy">
                   <div class="portfolio-overlay">
                     <div class="portfolio-info">
-                      <span class="project-category">Academic Project</span>
+                      <span class="project-category"><i class="bi bi-mortarboard-fill"></i> Academic Project</span>
                       <h4>Student Career Guide</h4>
                     </div>
                     <div class="portfolio-actions">
                       <a href="https://studentcarrier.netlify.app/" class="portfolio-link" target="_blank"
-                        rel="noopener">
-                        <i class="bi bi-link-45deg"></i>
+                        rel="noopener" title="Live Preview" aria-label="Open Live Demo">
+                        <i class="bi bi-box-arrow-up-right"></i>
                       </a>
-                      <a href="https://studentcarrier.netlify.app/" class="portfolio-details" target="_blank"
-                        rel="noopener">
-                        <i class="bi bi-arrow-right"></i>
-                      </a>
+                      <button type="button" class="portfolio-details btn-open-tech-modal" data-project-id="student-career-guide"
+                        title="View Full Tech Stack" aria-label="View Tech Stack Details">
+                        <i class="bi bi-layers-fill"></i>
+                      </button>
                     </div>
                   </div>
                 </div>
-                <div class="portfolio-meta">
-                  <div class="project-tags">
-                    <span class="tag">HTML</span>
-                    <span class="tag">JavaScript</span>
-                    <span class="tag">UI</span>
+
+                <div class="portfolio-card-body">
+                  <div class="card-meta-top">
+                    <span class="badge-category"><i class="bi bi-folder2"></i> Academic Project (SIH)</span>
+                    <span class="badge-year"><i class="bi bi-calendar3"></i> 2024</span>
                   </div>
-                  <div class="project-year">2024</div>
+
+                  <h4 class="card-title">
+                    <a href="https://studentcarrier.netlify.app/" target="_blank" rel="noopener">Student Career Guide</a>
+                  </h4>
+                  <p class="card-desc">
+                    Interactive roadmap and career guidance portal helping students navigate higher education roadmaps, skill benchmarks, and engineering specializations.
+                  </p>
+
+                  <!-- Dynamic Tech Stack Container -->
+                  <div class="project-tech-stack">
+                    <div class="tech-stack-header">
+                      <span class="tech-stack-label"><i class="bi bi-cpu-fill"></i> Tech Stack:</span>
+                      <span class="tech-stack-count">5 tools</span>
+                    </div>
+                    <div class="project-tech-badges">
+                      <!-- Populated dynamically by portfolio-tech-stack.js -->
+                      <button type="button" class="tech-badge" data-tool-name="HTML5" title="HTML5 • Semantic DOM & accessible page layout">
+                        <i class="bi bi-filetype-html tool-icon"></i>
+                        <span class="tool-name">HTML5</span>
+                      </button>
+                      <button type="button" class="tech-badge" data-tool-name="CSS3" title="CSS3 • Mobile-first responsive styling">
+                        <i class="bi bi-filetype-css tool-icon"></i>
+                        <span class="tool-name">CSS3</span>
+                      </button>
+                      <button type="button" class="tech-badge" data-tool-name="JavaScript" title="JavaScript • Career roadmap logic">
+                        <i class="bi bi-filetype-js tool-icon"></i>
+                        <span class="tool-name">JavaScript</span>
+                      </button>
+                      <button type="button" class="tech-badge" data-tool-name="Bootstrap 5" title="Bootstrap 5 • Modern UI grid">
+                        <i class="bi bi-bootstrap-fill tool-icon"></i>
+                        <span class="tool-name">Bootstrap 5</span>
+                      </button>
+                      <button type="button" class="tech-badge" data-tool-name="Netlify" title="Netlify • Automated CI/CD deployment">
+                        <i class="bi bi-cloud-check-fill tool-icon"></i>
+                        <span class="tool-name">Netlify</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="card-footer-actions">
+                    <a href="https://studentcarrier.netlify.app/" target="_blank" rel="noopener" class="btn-action-demo">
+                      <span>Live Demo</span>
+                      <i class="bi bi-arrow-up-right"></i>
+                    </a>
+                    <button type="button" class="btn-action-stack btn-open-tech-modal" data-project-id="student-career-guide">
+                      <i class="bi bi-layers"></i>
+                      <span>Stack Details</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- Project 2 -->
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-development">
-              <div class="portfolio-card">
+            <!-- Project 2: Kisan Procurement Centre -->
+            <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-development filter-digital"
+              id="portfolio-item-kisan-procurement"
+              data-project-id="kisan-procurement"
+              data-project-title="Kisan Procurement Centre"
+              data-project-category="AgriTech Platform (SIH)"
+              data-project-year="2025"
+              data-project-desc="Digital agricultural procurement platform enabling farmers to schedule MSP crop selling, reserve delivery slots, and access live market prices."
+              data-demo-url="https://kisan-procurement.onrender.com/"
+              data-github-url="https://github.com/MohitLovanshi372/kisan-procurement-"
+              data-tech-stack='[
+                {"name": "Node.js", "category": "Backend", "role": "Asynchronous server runtime & event loop", "icon": "bi-hdd-network-fill"},
+                {"name": "Express", "category": "Backend", "role": "RESTful API endpoints & server routing", "icon": "bi-server"},
+                {"name": "JavaScript", "category": "Frontend", "role": "Client state, form validation & dynamic calculations", "icon": "bi-filetype-js"},
+                {"name": "HTML5", "category": "Frontend", "role": "Server-rendered template views & structure", "icon": "bi-filetype-html"},
+                {"name": "CSS3", "category": "Styling", "role": "Custom dashboard stylesheet & responsive grid", "icon": "bi-filetype-css"},
+                {"name": "Render", "category": "Cloud Hosting", "role": "Containerized cloud service deployment", "icon": "bi-cloud-arrow-up-fill"}
+              ]'>
+              <div class="portfolio-card enhanced-card">
                 <div class="portfolio-image-container">
                   <img src="assets/img/portfolio/kisan%20procurement%20csntee%20sih.png"
                     alt="Kisan Procurement Centre website" class="img-fluid" loading="lazy">
                   <div class="portfolio-overlay">
                     <div class="portfolio-info">
-                      <span class="project-category">Website</span>
+                      <span class="project-category"><i class="bi bi-tree-fill"></i> AgriTech Platform</span>
                       <h4>Kisan Procurement Centre</h4>
                     </div>
                     <div class="portfolio-actions">
                       <a href="https://kisan-procurement.onrender.com/" class="portfolio-link" target="_blank"
-                        rel="noopener">
-                        <i class="bi bi-link-45deg"></i>
+                        rel="noopener" title="Live Preview" aria-label="Open Live Demo">
+                        <i class="bi bi-box-arrow-up-right"></i>
                       </a>
-                      <a href="https://kisan-procurement.onrender.com/" class="portfolio-details" target="_blank"
-                        rel="noopener">
-                        <i class="bi bi-arrow-right"></i>
-                      </a>
+                      <button type="button" class="portfolio-details btn-open-tech-modal" data-project-id="kisan-procurement"
+                        title="View Full Tech Stack" aria-label="View Tech Stack Details">
+                        <i class="bi bi-layers-fill"></i>
+                      </button>
                     </div>
                   </div>
                 </div>
-                <div class="portfolio-meta">
-                  <div class="project-tags">
-                    <span class="tag">HTML</span>
-                    <span class="tag">CSS</span>
-                    <span class="tag">JS</span>
+
+                <div class="portfolio-card-body">
+                  <div class="card-meta-top">
+                    <span class="badge-category"><i class="bi bi-folder2"></i> AgriTech Platform (SIH)</span>
+                    <span class="badge-year"><i class="bi bi-calendar3"></i> 2025</span>
                   </div>
-                  <div class="project-year">2025</div>
+
+                  <h4 class="card-title">
+                    <a href="https://kisan-procurement.onrender.com/" target="_blank" rel="noopener">Kisan Procurement Centre</a>
+                  </h4>
+                  <p class="card-desc">
+                    Digital agricultural procurement platform enabling farmers to schedule MSP crop selling, reserve delivery slots, and access live market prices.
+                  </p>
+
+                  <!-- Dynamic Tech Stack Container -->
+                  <div class="project-tech-stack">
+                    <div class="tech-stack-header">
+                      <span class="tech-stack-label"><i class="bi bi-cpu-fill"></i> Tech Stack:</span>
+                      <span class="tech-stack-count">6 tools</span>
+                    </div>
+                    <div class="project-tech-badges">
+                      <!-- Populated dynamically by portfolio-tech-stack.js -->
+                      <button type="button" class="tech-badge" data-tool-name="Node.js" title="Node.js • Async server runtime">
+                        <i class="bi bi-hdd-network-fill tool-icon"></i>
+                        <span class="tool-name">Node.js</span>
+                      </button>
+                      <button type="button" class="tech-badge" data-tool-name="Express" title="Express • RESTful API endpoints">
+                        <i class="bi bi-server tool-icon"></i>
+                        <span class="tool-name">Express</span>
+                      </button>
+                      <button type="button" class="tech-badge" data-tool-name="JavaScript" title="JavaScript • Client state & forms">
+                        <i class="bi bi-filetype-js tool-icon"></i>
+                        <span class="tool-name">JavaScript</span>
+                      </button>
+                      <button type="button" class="tech-badge" data-tool-name="HTML5" title="HTML5 • Template views">
+                        <i class="bi bi-filetype-html tool-icon"></i>
+                        <span class="tool-name">HTML5</span>
+                      </button>
+                      <button type="button" class="tech-badge" data-tool-name="CSS3" title="CSS3 • Dashboard grid">
+                        <i class="bi bi-filetype-css tool-icon"></i>
+                        <span class="tool-name">CSS3</span>
+                      </button>
+                      <button type="button" class="tech-badge" data-tool-name="Render" title="Render • Containerized deployment">
+                        <i class="bi bi-cloud-arrow-up-fill tool-icon"></i>
+                        <span class="tool-name">Render</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="card-footer-actions">
+                    <a href="https://kisan-procurement.onrender.com/" target="_blank" rel="noopener" class="btn-action-demo">
+                      <span>Live Demo</span>
+                      <i class="bi bi-arrow-up-right"></i>
+                    </a>
+                    <button type="button" class="btn-action-stack btn-open-tech-modal" data-project-id="kisan-procurement">
+                      <i class="bi bi-layers"></i>
+                      <span>Stack Details</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- Project 3 -->
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-digital">
-              <div class="portfolio-card">
+            <!-- Project 3: Smart Property Finder -->
+            <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-digital filter-creative"
+              id="portfolio-item-smart-property"
+              data-project-id="smart-property-finder"
+              data-project-title="Smart Property Finder"
+              data-project-category="Real Estate Web App"
+              data-project-year="2026"
+              data-project-desc="Intelligent real estate discovery platform featuring algorithmic property match scores, neighborhood evaluation indicators, and side-by-side comparison."
+              data-demo-url="https://smartpropertylov1c.netlify.app/"
+              data-github-url="https://github.com/MohitLovanshi372/smart-property-finder-"
+              data-tech-stack='[
+                {"name": "JavaScript", "category": "Frontend", "role": "Algorithmic recommendation & match score computation", "icon": "bi-filetype-js"},
+                {"name": "HTML5", "category": "Frontend", "role": "Semantic property card markup & metadata", "icon": "bi-filetype-html"},
+                {"name": "CSS3", "category": "Styling", "role": "Modern card layouts & responsive media queries", "icon": "bi-filetype-css"},
+                {"name": "Leaflet API", "category": "Maps / Geo", "role": "Interactive geospatial maps & marker popups", "icon": "bi-geo-alt-fill"},
+                {"name": "Netlify", "category": "Cloud / CI-CD", "role": "Fast Jamstack global edge distribution", "icon": "bi-cloud-check-fill"}
+              ]'>
+              <div class="portfolio-card enhanced-card">
                 <div class="portfolio-image-container">
                   <img src="assets/img/portfolio/property%20project%20images.png" alt="Smart Property Finder project"
                     class="img-fluid" loading="lazy">
                   <div class="portfolio-overlay">
                     <div class="portfolio-info">
-                      <span class="project-category">Web App</span>
+                      <span class="project-category"><i class="bi bi-buildings-fill"></i> Real Estate Web App</span>
                       <h4>Smart Property Finder</h4>
                     </div>
                     <div class="portfolio-actions">
                       <a href="https://smartpropertylov1c.netlify.app/" class="portfolio-link" target="_blank"
-                        rel="noopener">
-                        <i class="bi bi-link-45deg"></i>
+                        rel="noopener" title="Live Preview" aria-label="Open Live Demo">
+                        <i class="bi bi-box-arrow-up-right"></i>
                       </a>
-                      <a href="https://smartpropertylov1c.netlify.app/" class="portfolio-details" target="_blank"
-                        rel="noopener">
-                        <i class="bi bi-arrow-right"></i>
-                      </a>
+                      <button type="button" class="portfolio-details btn-open-tech-modal" data-project-id="smart-property-finder"
+                        title="View Full Tech Stack" aria-label="View Tech Stack Details">
+                        <i class="bi bi-layers-fill"></i>
+                      </button>
                     </div>
                   </div>
                 </div>
-                <div class="portfolio-meta">
-                  <div class="project-tags">
-                    <span class="tag">UI</span>
-                    <span class="tag">Responsive</span>
-                    <span class="tag">Property</span>
+
+                <div class="portfolio-card-body">
+                  <div class="card-meta-top">
+                    <span class="badge-category"><i class="bi bi-folder2"></i> Real Estate Web App</span>
+                    <span class="badge-year"><i class="bi bi-calendar3"></i> 2026</span>
                   </div>
-                  <div class="project-year">2026</div>
+
+                  <h4 class="card-title">
+                    <a href="https://smartpropertylov1c.netlify.app/" target="_blank" rel="noopener">Smart Property Finder</a>
+                  </h4>
+                  <p class="card-desc">
+                    Intelligent real estate discovery platform featuring algorithmic property match scores, neighborhood evaluation indicators, and side-by-side comparison.
+                  </p>
+
+                  <!-- Dynamic Tech Stack Container -->
+                  <div class="project-tech-stack">
+                    <div class="tech-stack-header">
+                      <span class="tech-stack-label"><i class="bi bi-cpu-fill"></i> Tech Stack:</span>
+                      <span class="tech-stack-count">5 tools</span>
+                    </div>
+                    <div class="project-tech-badges">
+                      <!-- Populated dynamically by portfolio-tech-stack.js -->
+                      <button type="button" class="tech-badge" data-tool-name="JavaScript" title="JavaScript • Match score algorithm">
+                        <i class="bi bi-filetype-js tool-icon"></i>
+                        <span class="tool-name">JavaScript</span>
+                      </button>
+                      <button type="button" class="tech-badge" data-tool-name="Leaflet API" title="Leaflet API • Interactive maps">
+                        <i class="bi bi-geo-alt-fill tool-icon"></i>
+                        <span class="tool-name">Leaflet API</span>
+                      </button>
+                      <button type="button" class="tech-badge" data-tool-name="HTML5" title="HTML5 • Semantic DOM structure">
+                        <i class="bi bi-filetype-html tool-icon"></i>
+                        <span class="tool-name">HTML5</span>
+                      </button>
+                      <button type="button" class="tech-badge" data-tool-name="CSS3" title="CSS3 • Modern property cards">
+                        <i class="bi bi-filetype-css tool-icon"></i>
+                        <span class="tool-name">CSS3</span>
+                      </button>
+                      <button type="button" class="tech-badge" data-tool-name="Netlify" title="Netlify • Edge CDN delivery">
+                        <i class="bi bi-cloud-check-fill tool-icon"></i>
+                        <span class="tool-name">Netlify</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="card-footer-actions">
+                    <a href="https://smartpropertylov1c.netlify.app/" target="_blank" rel="noopener" class="btn-action-demo">
+                      <span>Live Demo</span>
+                      <i class="bi bi-arrow-up-right"></i>
+                    </a>
+                    <button type="button" class="btn-action-stack btn-open-tech-modal" data-project-id="smart-property-finder">
+                      <i class="bi bi-layers"></i>
+                      <span>Stack Details</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- Project 4 -->
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-creative">
-              <div class="portfolio-card">
+            <!-- Project 4: AutoHub Car Deal -->
+            <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-creative filter-digital"
+              id="portfolio-item-autohub-deal"
+              data-project-id="autohub-car-deal"
+              data-project-title="AutoHub Car Deal"
+              data-project-category="UI Design & Web"
+              data-project-year="2024-25"
+              data-project-desc="Automobile dealership showcase platform featuring interactive vehicle specifications inspection, 360 showcase elements, and test-drive scheduling."
+              data-demo-url="https://car-autohub.netlify.app/"
+              data-github-url="https://github.com/MohitLovanshi372"
+              data-tech-stack='[
+                {"name": "Figma", "category": "UI/UX Design", "role": "Component design system & interactive prototypes", "icon": "bi-vector-pen"},
+                {"name": "HTML5", "category": "Frontend", "role": "Accessible automotive showcase DOM structure", "icon": "bi-filetype-html"},
+                {"name": "CSS3", "category": "Styling", "role": "Fluid keyframe animations & hover effects", "icon": "bi-filetype-css"},
+                {"name": "JavaScript", "category": "Frontend", "role": "Interactive vehicle filter & booking modal logic", "icon": "bi-filetype-js"},
+                {"name": "Netlify", "category": "Cloud / CI-CD", "role": "Edge CDN hosting with instant cache invalidation", "icon": "bi-cloud-check-fill"}
+              ]'>
+              <div class="portfolio-card enhanced-card">
                 <div class="portfolio-image-container">
                   <img src="assets/img/portfolio/car autohub.png" alt="AutoHub car deal project" class="img-fluid"
                     loading="lazy">
                   <div class="portfolio-overlay">
                     <div class="portfolio-info">
-                      <span class="project-category">UI Design</span>
+                      <span class="project-category"><i class="bi bi-palette-fill"></i> UI Design & Web</span>
                       <h4>AutoHub Car Deal</h4>
                     </div>
                     <div class="portfolio-actions">
-                      <a href="https://car-autohub.netlify.app/" class="portfolio-link" target="_blank" rel="noopener">
-                        <i class="bi bi-link-45deg"></i>
+                      <a href="https://car-autohub.netlify.app/" class="portfolio-link" target="_blank" rel="noopener"
+                        title="Live Preview" aria-label="Open Live Demo">
+                        <i class="bi bi-box-arrow-up-right"></i>
                       </a>
-                      <a href="https://car-autohub.netlify.app/" class="portfolio-details" target="_blank"
-                        rel="noopener">
-                        <i class="bi bi-arrow-right"></i>
-                      </a>
+                      <button type="button" class="portfolio-details btn-open-tech-modal" data-project-id="autohub-car-deal"
+                        title="View Full Tech Stack" aria-label="View Tech Stack Details">
+                        <i class="bi bi-layers-fill"></i>
+                      </button>
                     </div>
                   </div>
                 </div>
-                <div class="portfolio-meta">
-                  <div class="project-tags">
-                    <span class="tag">UI</span>
-                    <span class="tag">Design</span>
-                    <span class="tag">Landing Page</span>
+
+                <div class="portfolio-card-body">
+                  <div class="card-meta-top">
+                    <span class="badge-category"><i class="bi bi-folder2"></i> UI Design & Web</span>
+                    <span class="badge-year"><i class="bi bi-calendar3"></i> 2024-25</span>
                   </div>
-                  <div class="project-year">2024-25</div>
+
+                  <h4 class="card-title">
+                    <a href="https://car-autohub.netlify.app/" target="_blank" rel="noopener">AutoHub Car Deal</a>
+                  </h4>
+                  <p class="card-desc">
+                    Automobile dealership showcase platform featuring interactive vehicle specifications inspection, 360 showcase elements, and test-drive scheduling.
+                  </p>
+
+                  <!-- Dynamic Tech Stack Container -->
+                  <div class="project-tech-stack">
+                    <div class="tech-stack-header">
+                      <span class="tech-stack-label"><i class="bi bi-cpu-fill"></i> Tech Stack:</span>
+                      <span class="tech-stack-count">5 tools</span>
+                    </div>
+                    <div class="project-tech-badges">
+                      <!-- Populated dynamically by portfolio-tech-stack.js -->
+                      <button type="button" class="tech-badge" data-tool-name="Figma" title="Figma • Component design system">
+                        <i class="bi bi-vector-pen tool-icon"></i>
+                        <span class="tool-name">Figma</span>
+                      </button>
+                      <button type="button" class="tech-badge" data-tool-name="HTML5" title="HTML5 • Semantic showcase structure">
+                        <i class="bi bi-filetype-html tool-icon"></i>
+                        <span class="tool-name">HTML5</span>
+                      </button>
+                      <button type="button" class="tech-badge" data-tool-name="CSS3" title="CSS3 • Keyframe animations">
+                        <i class="bi bi-filetype-css tool-icon"></i>
+                        <span class="tool-name">CSS3</span>
+                      </button>
+                      <button type="button" class="tech-badge" data-tool-name="JavaScript" title="JavaScript • Vehicle filter & booking">
+                        <i class="bi bi-filetype-js tool-icon"></i>
+                        <span class="tool-name">JavaScript</span>
+                      </button>
+                      <button type="button" class="tech-badge" data-tool-name="Netlify" title="Netlify • Instant edge CDN hosting">
+                        <i class="bi bi-cloud-check-fill tool-icon"></i>
+                        <span class="tool-name">Netlify</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="card-footer-actions">
+                    <a href="https://car-autohub.netlify.app/" target="_blank" rel="noopener" class="btn-action-demo">
+                      <span>Live Demo</span>
+                      <i class="bi bi-arrow-up-right"></i>
+                    </a>
+                    <button type="button" class="btn-action-stack btn-open-tech-modal" data-project-id="autohub-car-deal">
+                      <i class="bi bi-layers"></i>
+                      <span>Stack Details</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
 
           </div>
         </div>
+
+        <!-- GitHub Stats & Real-Time Activity Widget -->
+        <div id="github-stats-widget" class="github-stats-widget" data-aos="fade-up" data-aos-delay="350">
+          <div class="github-widget-header">
+            <div class="header-left">
+              <div class="github-badge">
+                <i class="bi bi-github"></i>
+                <span>GitHub Real-Time Metrics</span>
+              </div>
+              <h3 class="widget-title">Live Repository &amp; Contribution Activity</h3>
+              <p class="widget-subtitle">Real-time repository telemetry, programming language breakdown, and public commit records synced directly with the GitHub API.</p>
+            </div>
+            <div class="header-right">
+              <div class="sync-status">
+                <span class="live-dot" id="github-live-dot"></span>
+                <span class="sync-text" id="github-sync-text">Live Sync</span>
+                <span class="sync-time" id="github-sync-time">Connecting...</span>
+              </div>
+              <button id="github-refresh-btn" class="btn-refresh" type="button" aria-label="Refresh GitHub Data" title="Fetch latest GitHub data">
+                <i class="bi bi-arrow-clockwise"></i>
+                <span>Refresh</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick Metrics Grid -->
+          <div class="github-metrics-grid">
+            <div class="github-metric-card" id="card-stat-repos">
+              <div class="metric-icon"><i class="bi bi-journal-code"></i></div>
+              <div class="metric-content">
+                <span class="metric-value" id="stat-total-repos">--</span>
+                <span class="metric-label">Public Repos</span>
+              </div>
+            </div>
+            <div class="github-metric-card" id="card-stat-commits">
+              <div class="metric-icon"><i class="bi bi-git"></i></div>
+              <div class="metric-content">
+                <span class="metric-value" id="stat-recent-commits">--</span>
+                <span class="metric-label">Recent Commits</span>
+              </div>
+            </div>
+            <div class="github-metric-card" id="card-stat-languages">
+              <div class="metric-icon"><i class="bi bi-code-slash"></i></div>
+              <div class="metric-content">
+                <span class="metric-value" id="stat-languages-count">--</span>
+                <span class="metric-label">Languages Used</span>
+              </div>
+            </div>
+            <div class="github-metric-card" id="card-stat-events">
+              <div class="metric-icon"><i class="bi bi-activity"></i></div>
+              <div class="metric-content">
+                <span class="metric-value" id="stat-public-events">--</span>
+                <span class="metric-label">Public Events</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- GitHub Contribution Calendar Heatmap Visualizer -->
+          <div class="github-calendar-heatmap-panel" id="github-calendar-heatmap-panel">
+            <div class="heatmap-header">
+              <div class="heatmap-title-wrap">
+                <div class="heatmap-icon-badge">
+                  <i class="bi bi-calendar3-range"></i>
+                </div>
+                <div>
+                  <h4 class="heatmap-title">Annual Contribution Activity</h4>
+                  <p class="heatmap-subtitle">
+                    <span id="heatmap-total-count" class="heatmap-highlight">--</span> contributions in the last year synced directly from GitHub
+                  </p>
+                </div>
+              </div>
+
+              <!-- Heatmap Controls & Options -->
+              <div class="heatmap-controls">
+                <!-- Color Theme Selector -->
+                <div class="heatmap-palette-picker" title="Select Heatmap Color Palette">
+                  <span class="palette-label">Palette:</span>
+                  <div class="palette-options" role="radiogroup" aria-label="Heatmap color palette">
+                    <button type="button" class="btn-palette active" data-palette="emerald" title="GitHub Classic Emerald" aria-label="GitHub Emerald">
+                      <span class="palette-swatch swatch-emerald"></span>
+                    </button>
+                    <button type="button" class="btn-palette" data-palette="violet" title="Portfolio Accent (Violet)" aria-label="Portfolio Accent Violet">
+                      <span class="palette-swatch swatch-violet"></span>
+                    </button>
+                    <button type="button" class="btn-palette" data-palette="cyan" title="Cyber Cyan" aria-label="Cyber Cyan">
+                      <span class="palette-swatch swatch-cyan"></span>
+                    </button>
+                    <button type="button" class="btn-palette" data-palette="amber" title="Golden Solar" aria-label="Golden Solar">
+                      <span class="palette-swatch swatch-amber"></span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Range Selector (12M / 6M / 3M) -->
+                <div class="heatmap-range-pills" role="radiogroup" aria-label="Heatmap time range">
+                  <button type="button" class="range-pill active" data-range="12" aria-pressed="true">12M</button>
+                  <button type="button" class="range-pill" data-range="6" aria-pressed="false">6M</button>
+                  <button type="button" class="range-pill" data-range="3" aria-pressed="false">3M</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Heatmap Summary Stat Badges -->
+            <div class="heatmap-stats-strip">
+              <div class="heatmap-stat-item">
+                <span class="stat-icon"><i class="bi bi-fire text-warning"></i></span>
+                <div class="stat-text-group">
+                  <span class="stat-number" id="heatmap-current-streak">--</span>
+                  <span class="stat-sub">Current Streak</span>
+                </div>
+              </div>
+              <div class="heatmap-stat-item">
+                <span class="stat-icon"><i class="bi bi-trophy-fill text-accent"></i></span>
+                <div class="stat-text-group">
+                  <span class="stat-number" id="heatmap-longest-streak">--</span>
+                  <span class="stat-sub">Longest Streak</span>
+                </div>
+              </div>
+              <div class="heatmap-stat-item">
+                <span class="stat-icon"><i class="bi bi-calendar-check-fill text-success"></i></span>
+                <div class="stat-text-group">
+                  <span class="stat-number" id="heatmap-active-days">--</span>
+                  <span class="stat-sub">Active Days</span>
+                </div>
+              </div>
+              <div class="heatmap-stat-item">
+                <span class="stat-icon"><i class="bi bi-lightning-charge-fill text-primary"></i></span>
+                <div class="stat-text-group">
+                  <span class="stat-number" id="heatmap-max-day">--</span>
+                  <span class="stat-sub">Peak Day Record</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Heatmap Scrollable Stage -->
+            <div class="heatmap-scroll-container">
+              <div class="heatmap-graph-wrapper" id="github-heatmap-graph">
+                <!-- Heatmap SVG & grid rendered dynamically -->
+                <div class="heatmap-loading-placeholder">
+                  <div class="spinner-border spinner-border-sm text-secondary" role="status"></div>
+                  <span class="ms-2">Loading contribution heatmap...</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Heatmap Footer: Legend & Info -->
+            <div class="heatmap-footer">
+              <div class="heatmap-legend">
+                <span class="legend-text">Less</span>
+                <span class="legend-cell level-0" title="0 contributions"></span>
+                <span class="legend-cell level-1" title="1-2 contributions"></span>
+                <span class="legend-cell level-2" title="3-5 contributions"></span>
+                <span class="legend-cell level-3" title="6-9 contributions"></span>
+                <span class="legend-cell level-4" title="10+ contributions"></span>
+                <span class="legend-text">More</span>
+              </div>
+              <div class="heatmap-footer-note">
+                <i class="bi bi-check-circle-fill text-success me-1"></i>
+                <span>Synced in real time with GitHub public contribution graph</span>
+              </div>
+            </div>
+
+            <!-- Dynamic Floating Tooltip -->
+            <div id="heatmap-dynamic-tooltip" class="heatmap-tooltip d-none" role="tooltip"></div>
+          </div>
+
+          <!-- Languages Breakdown Panel -->
+          <div class="github-languages-panel" id="github-languages-panel">
+            <div class="panel-header">
+              <div class="panel-title-wrap">
+                <i class="bi bi-pie-chart-fill"></i>
+                <h4>Languages Distribution</h4>
+              </div>
+              <span class="panel-hint">Click a language chip to filter repositories</span>
+            </div>
+            <div class="language-progress-bar" id="github-lang-progress-bar" role="progressbar" aria-label="Language distribution bar">
+              <!-- Populated dynamically -->
+            </div>
+            <div class="language-chips" id="github-lang-chips">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <!-- Repositories Controls & Filter -->
+          <div class="github-repos-section" id="github-repos-section">
+            <div class="repos-toolbar">
+              <div class="toolbar-title">
+                <i class="bi bi-folder2-open"></i>
+                <h4>Repositories (<span id="github-repos-count">0</span>)</h4>
+              </div>
+              <div class="toolbar-actions">
+                <div class="search-input-wrap">
+                  <i class="bi bi-search"></i>
+                  <input type="text" id="github-repo-search" placeholder="Search repositories..." aria-label="Search repositories">
+                  <button type="button" id="github-clear-search" class="clear-search-btn" aria-label="Clear search" style="display: none;">
+                    <i class="bi bi-x"></i>
+                  </button>
+                </div>
+                <div class="sort-select-wrap">
+                  <select id="github-repo-sort" aria-label="Sort repositories">
+                    <option value="pushed">Recently Pushed</option>
+                    <option value="stars">Most Stars</option>
+                    <option value="name">Name (A-Z)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Repositories Grid Container -->
+            <div class="github-repos-grid" id="github-repos-container">
+              <!-- Populated dynamically with repo cards or loading skeletons -->
+            </div>
+
+            <!-- Repositories Footer (Show more + Profile link) -->
+            <div class="github-repos-footer" id="github-repos-footer">
+              <button type="button" id="github-toggle-view-btn" class="btn-toggle-repos" style="display: none;">
+                <span>Show All Repositories</span>
+                <i class="bi bi-chevron-down"></i>
+              </button>
+              <a href="https://github.com/MohitLovanshi372" target="_blank" rel="noopener" class="btn-github-profile" id="github-profile-link">
+                <i class="bi bi-github"></i>
+                <span>View Full GitHub Profile</span>
+                <i class="bi bi-arrow-up-right"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Recent Contribution Activity Stream -->
+          <div class="github-activity-section" id="github-activity-section">
+            <div class="activity-header">
+              <div class="activity-title-wrap">
+                <i class="bi bi-clock-history"></i>
+                <h4>Recent Contribution Activity</h4>
+              </div>
+              <span class="activity-subtitle">Recorded from GitHub Public Event Stream</span>
+            </div>
+            <div class="activity-feed" id="github-activity-feed">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+        </div>
+        <!-- /GitHub Stats & Real-Time Activity Widget -->
 
         <div class="portfolio-bottom" data-aos="fade-up" data-aos-delay="400">
           <div class="row align-items-center">
@@ -751,6 +1302,270 @@
 
     </section><!-- /Contact Section -->
 
+    <!-- 3D Space Solar System, Projects Universe & GitHub Command Room with Rocket Spaceship -->
+    <section id="space-solar-system" class="space-solar-system section dark-background">
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <span class="description-title">3D Space Universe</span>
+        <h2>Solar System &amp; GitHub Room</h2>
+        <p>Explore Mohit's projects orbiting as celestial planets, pilot the 3D rocket spaceship with flight controls, and enter the orbital GitHub command room.</p>
+      </div><!-- End Section Title -->
+
+      <div class="container-fluid container-xl" data-aos="fade-up" data-aos-delay="100">
+        <div class="space-universe-wrapper" id="space-solar-system-wrapper">
+          
+          <!-- Top HUD Toolbar -->
+          <div class="space-hud-top">
+            <div class="space-hud-left">
+              <div class="space-badge">
+                <span class="space-live-dot"></span>
+                <i class="bi bi-rocket-takeoff-fill text-accent"></i>
+                <span class="space-badge-title">Interactive 3D Universe</span>
+              </div>
+              <!-- Camera / Navigation Modes -->
+              <div class="space-mode-pill-group" role="tablist">
+                <button type="button" class="space-pill-btn active" data-cam-mode="follow" title="Third-Person Rocket Spaceship Cockpit View">
+                  <i class="bi bi-rocket-takeoff me-1"></i> Rocket Spaceship
+                </button>
+                <button type="button" class="space-pill-btn" data-cam-mode="orbit" title="Free Orbit View of Solar System">
+                  <i class="bi bi-globe2 me-1"></i> Orbit View
+                </button>
+                <button type="button" class="space-pill-btn" data-cam-mode="github" title="Enter GitHub Space Station Command Room">
+                  <i class="bi bi-github me-1"></i> GitHub Room
+                </button>
+              </div>
+            </div>
+
+            <div class="space-hud-right">
+              <!-- Audio Synth Toggle -->
+              <button type="button" id="space-audio-toggle" class="space-action-btn" title="Toggle Cosmic Ambient Synthesizer">
+                <i class="bi bi-volume-up-fill"></i>
+                <span>Cosmic Audio</span>
+              </button>
+
+              <!-- Guided Tour -->
+              <button type="button" id="space-tour-btn" class="space-action-btn" title="Automated Tour of all Celestial Projects">
+                <i class="bi bi-compass me-1"></i>
+                <span>Auto Tour</span>
+              </button>
+
+              <!-- Speed Presets -->
+              <div class="space-speed-group" title="Orbit Speed Multiplier">
+                <button type="button" class="speed-btn active" data-orbit-speed="1">1x</button>
+                <button type="button" class="speed-btn" data-orbit-speed="2">2x</button>
+                <button type="button" class="speed-btn" data-orbit-speed="0">Pause</button>
+              </div>
+
+              <!-- Fullscreen Button -->
+              <button type="button" id="space-fullscreen-btn" class="space-action-btn icon-only" title="Toggle Fullscreen Universe" aria-label="Toggle Fullscreen">
+                <i class="bi bi-arrows-fullscreen"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Real-Time Cosmic Status Bar -->
+          <div class="space-status-bar">
+            <div class="status-left">
+              <span class="status-radar-ping"></span>
+              <span id="space-status-ticker" class="status-ticker-text">Rocket Spaceship active • Use W/A/S/D or flight controls to pilot &amp; explore celestial repos</span>
+            </div>
+            <div class="status-right d-none d-md-flex">
+              <span class="status-metric"><i class="bi bi-sun text-warning me-1"></i>1 Sun Core</span>
+              <span class="status-metric"><i class="bi bi-planet text-info me-1"></i>5 GitHub Projects</span>
+              <span class="status-metric"><i class="bi bi-asterisk text-warning me-1"></i>Asteroid Belt</span>
+              <span class="status-metric"><i class="bi bi-building text-success me-1"></i>1 GitHub Station</span>
+            </div>
+          </div>
+
+          <!-- 3D Three.js Canvas Stage -->
+          <div class="space-canvas-viewport position-relative">
+            <div id="space-solar-canvas-container" class="space-solar-canvas-container">
+              <!-- Three.js Canvas renders dynamically here -->
+            </div>
+
+            <!-- On-Screen Virtual Flight D-Pad / Rocket Spaceship Movement Overlay -->
+            <div class="space-walk-controls-overlay">
+              <div class="walk-dpad-panel">
+                <div class="dpad-row">
+                  <button type="button" class="dpad-btn btn-up" data-dpad="forward" title="Thrust Forward (W / Up)">
+                    <i class="bi bi-chevron-up"></i>
+                  </button>
+                </div>
+                <div class="dpad-row dpad-middle">
+                  <button type="button" class="dpad-btn btn-left" data-dpad="left" title="Bank &amp; Steer Left (A / Left)">
+                    <i class="bi bi-chevron-left"></i>
+                  </button>
+                  <button type="button" class="dpad-btn btn-sprint" data-dpad="sprint" title="Hyperdrive Boost (Shift)">
+                    <i class="bi bi-lightning-charge-fill"></i>
+                  </button>
+                  <button type="button" class="dpad-btn btn-right" data-dpad="right" title="Bank &amp; Steer Right (D / Right)">
+                    <i class="bi bi-chevron-right"></i>
+                  </button>
+                </div>
+                <div class="dpad-row">
+                  <button type="button" class="dpad-btn btn-down" data-dpad="backward" title="Reverse Thrusters / Decelerate (S / Down)">
+                    <i class="bi bi-chevron-down"></i>
+                  </button>
+                </div>
+              </div>
+              <span class="dpad-label">Flight Controls</span>
+            </div>
+
+            <!-- Quick Waypoints Strip -->
+            <div class="space-waypoints-panel">
+              <span class="waypoints-title"><i class="bi bi-geo-alt-fill me-1 text-accent"></i>Celestial Destinations:</span>
+              <div class="waypoints-scroll">
+                <button type="button" class="waypoint-chip chip-github" data-waypoint="github">
+                  <i class="bi bi-github me-1"></i> GitHub Room
+                </button>
+                <button type="button" class="waypoint-chip chip-kisan" data-waypoint="kisan-procurement">
+                  <span class="chip-dot dot-emerald"></span> Kisan Procurement
+                </button>
+                <button type="button" class="waypoint-chip chip-property" data-waypoint="smart-property">
+                  <span class="chip-dot dot-azure"></span> Smart Property Finder
+                </button>
+                <button type="button" class="waypoint-chip chip-career" data-waypoint="student-career">
+                  <span class="chip-dot dot-cyan"></span> Student Career Guide
+                </button>
+                <button type="button" class="waypoint-chip chip-asteroid" data-waypoint="asteroid-belt">
+                  <i class="bi bi-asterisk text-warning me-1"></i> Asteroid Belt
+                </button>
+                <button type="button" class="waypoint-chip chip-auto" data-waypoint="autohub-deal">
+                  <span class="chip-dot dot-ruby"></span> AutoHub Car Deal
+                </button>
+                <button type="button" class="waypoint-chip chip-portfolio" data-waypoint="portfolio-3d">
+                  <span class="chip-dot dot-purple"></span> 3D Portfolio Universe
+                </button>
+                <button type="button" class="waypoint-chip chip-sun" data-waypoint="sun">
+                  <i class="bi bi-sun-fill text-warning me-1"></i> Core Sun
+                </button>
+              </div>
+            </div>
+
+            <!-- Project Hologram Inspection Drawer -->
+            <div id="space-project-drawer" class="space-project-drawer d-none">
+              <div class="drawer-header">
+                <div class="drawer-badge-wrap">
+                  <span class="drawer-planet-icon"><i class="bi bi-circle-fill"></i></span>
+                  <div>
+                    <span id="space-drawer-cat" class="drawer-cat">Category</span>
+                    <h4 id="space-drawer-title" class="drawer-title">Project Name</h4>
+                  </div>
+                </div>
+                <button type="button" class="btn-close-drawer" data-close-space-drawer aria-label="Close">
+                  <i class="bi bi-x-lg"></i>
+                </button>
+              </div>
+              <p id="space-drawer-desc" class="drawer-desc">Project description goes here...</p>
+              <div class="drawer-repo-meta mb-2 p-2 rounded d-flex align-items-center justify-content-between" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                <span class="small font-monospace text-info d-inline-flex align-items-center gap-1">
+                  <i class="bi bi-git"></i>
+                  <span id="space-drawer-repo-name">MohitLovanshi372/...</span>
+                </span>
+                <span class="badge bg-dark text-light border border-secondary small font-monospace"><i class="bi bi-diagram-2 me-1"></i>main</span>
+              </div>
+              <div class="drawer-tech-wrap">
+                <span class="drawer-tech-label">Architecture &amp; Tech Stack:</span>
+                <div id="space-drawer-tags" class="drawer-tags d-flex flex-wrap gap-1 mt-1"></div>
+              </div>
+              <div class="drawer-actions mt-3 d-flex gap-2">
+                <a id="space-drawer-demo-btn" href="#" target="_blank" rel="noopener" class="btn btn-sm btn-primary">
+                  <i class="bi bi-box-arrow-up-right me-1"></i> Live Demo
+                </a>
+                <a id="space-drawer-repo-btn" href="#" target="_blank" rel="noopener" class="btn btn-sm btn-outline-light">
+                  <i class="bi bi-github me-1"></i> GitHub Repo
+                </a>
+              </div>
+            </div>
+
+            <!-- GitHub Command Room Telemetry Modal -->
+            <div id="space-github-room-modal" class="space-github-room-modal d-none">
+              <div class="github-room-card">
+                <div class="room-card-header">
+                  <div class="d-flex align-items-center gap-2">
+                    <div class="room-octo-icon">
+                      <i class="bi bi-github"></i>
+                    </div>
+                    <div>
+                      <h4 class="room-title">GitHub Command Room</h4>
+                      <p class="room-subtitle">Orbital Space Station • MohitLovanshi372</p>
+                    </div>
+                  </div>
+                  <button type="button" class="btn-close-drawer" data-close-space-drawer aria-label="Close">
+                    <i class="bi bi-x-lg"></i>
+                  </button>
+                </div>
+
+                <div class="room-telemetry-grid">
+                  <div class="telemetry-card">
+                    <span class="telemetry-val text-success">106</span>
+                    <span class="telemetry-lbl">Annual Commits</span>
+                  </div>
+                  <div class="telemetry-card">
+                    <span class="telemetry-val text-warning">2 Days</span>
+                    <span class="telemetry-lbl">Current Streak</span>
+                  </div>
+                  <div class="telemetry-card">
+                    <span class="telemetry-val text-info">6 Days</span>
+                    <span class="telemetry-lbl">Peak Streak</span>
+                  </div>
+                  <div class="telemetry-card">
+                    <span class="telemetry-val text-accent">11 Peaks</span>
+                    <span class="telemetry-lbl">Best Day Record</span>
+                  </div>
+                </div>
+
+                <div class="room-terminal-feed">
+                  <div class="terminal-bar">
+                    <span class="term-dot red"></span>
+                    <span class="term-dot yellow"></span>
+                    <span class="term-dot green"></span>
+                    <span class="term-title">github-station-terminal:~/live-activity</span>
+                  </div>
+                  <pre class="terminal-body">
+<code><span class="text-success">$ git status --universe</span>
+On branch main (Mohit Lovanshi Space Station)
+Celestial projects synced: 5 active planets
+Real-time webhooks: Connected to api.github.com
+Spaceship status: Online &amp; Navigating Interplanetary Orbit
+Last push: Portfolio Heatmap &amp; 3D Transitions synced</code></pre>
+                </div>
+
+                <div class="room-actions d-flex justify-content-between align-items-center mt-3">
+                  <span class="text-muted small"><i class="bi bi-broadcast text-success me-1"></i>Station Telemetry Active</span>
+                  <a href="https://github.com/mohitlovanshi372" target="_blank" rel="noopener" class="btn btn-sm btn-outline-info">
+                    <i class="bi bi-github me-1"></i> Open GitHub Profile
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Instruction Footer -->
+          <div class="space-footer-guide">
+            <div class="guide-item">
+              <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> or <kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd>
+              <span>Steer &amp; thrust spaceship</span>
+            </div>
+            <div class="guide-item">
+              <kbd>Shift</kbd>
+              <span>Hyperdrive boost</span>
+            </div>
+            <div class="guide-item">
+              <i class="bi bi-cursor-fill me-1"></i>
+              <span>Click any planet or station to inspect</span>
+            </div>
+            <div class="guide-item">
+              <i class="bi bi-arrows-move me-1"></i>
+              <span>Drag to rotate camera view</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section><!-- /3D Space Solar System Section -->
+
   </main>
 
   <footer id="footer" class="footer">
@@ -784,6 +1599,9 @@
             <li><a href="#about">About</a></li>
             <li><a href="#resume">Resume</a></li>
             <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#space-solar-system" class="space-useful-link active-highlight"><i class="bi bi-rocket-takeoff-fill text-accent me-1"></i>3D Solar System <span class="badge-space-pill">3D</span></a></li>
+            <li><a href="#space-solar-system" class="space-useful-link"><i class="bi bi-rocket-takeoff text-warning me-1"></i>Rocket Spaceship <span class="badge-space-pill">Ship</span></a></li>
+            <li><a href="#space-solar-system" class="space-useful-link"><i class="bi bi-github text-info me-1"></i>GitHub Room <span class="badge-space-pill">Room</span></a></li>
           </ul>
         </div>
 
@@ -835,6 +1653,24 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <!-- GitHub Stats Widget JS -->
+  <script src="assets/js/github-stats.js"></script>
+
+  <!-- Portfolio Dynamic Tech Stack Engine -->
+  <script src="assets/js/portfolio-tech-stack.js"></script>
+
+  <!-- Portfolio 3D Transitions & Spatial Showcase Engine -->
+  <script src="assets/js/portfolio-3d.js"></script>
+
+  <!-- Three.js 3D WebGL Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- 3D Space Solar System, Projects Universe & Rocket Spaceship Engine -->
+  <script src="assets/js/space-solar-system.js"></script>
+
+  <!-- Theme Switcher Engine -->
+  <script src="assets/js/theme-switcher.js"></script>
 
 </body>
 

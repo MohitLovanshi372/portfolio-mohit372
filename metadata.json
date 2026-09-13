@@ -1,0 +1,9 @@
+{
+  "name": "Mohit Lovanshi - Developer Portfolio",
+  "description": "Portfolio website of Mohit Lovanshi, CSE student and full-stack developer showcasing projects with interactive 3D transitions, dynamic tech stacks, real-time GitHub stats with an annual contribution heatmap, an interactive 3D Space Solar System project universe with an orbital GitHub command room and pilotable 3D rocket spaceship, and theme switcher.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
+

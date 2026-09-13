@@ -25,7 +25,21 @@
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
 
-  
+  <!-- Theme Preference Early Initialization -->
+  <script>
+    (function () {
+      try {
+        var storedTheme = localStorage.getItem('portfolio_theme_preference');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = storedTheme ? storedTheme : (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark-theme');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
 </head>
 
 <body class="portfolio-details-page">
@@ -36,21 +50,34 @@
       <a href="index.html" class="logo d-flex align-items-center me-auto">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.webp" alt=""> -->
-        <h1 class="sitename">mohit Lovanshi</h1>
+        <h1 class="sitename">Mohit Lovanshi</h1>
       </a>
 <nav id="navmenu" class="navmenu">
   <ul>
-    <li><a href="#hero">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#resume">Resume</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#portfolio">Portfolio</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="index.html#hero">Home</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#resume">Resume</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#portfolio">Portfolio</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li class="d-xl-none"><a href="#" class="theme-toggle-nav-link" data-theme-toggle><i class="bi bi-moon-stars me-2"></i> <span class="theme-toggle-label">Switch Theme</span></a></li>
   </ul>
   <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
 </nav>
 
-<a class="btn-getstarted" href="#about">Get Started</a>
+<div class="header-actions d-flex align-items-center">
+  <!-- Theme Toggle Button -->
+  <button type="button" id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle theme" title="Switch theme (Shift+D)">
+    <span class="theme-toggle-track">
+      <span class="theme-toggle-thumb">
+        <i class="bi bi-sun-fill icon-sun"></i>
+        <i class="bi bi-moon-stars-fill icon-moon"></i>
+      </span>
+    </span>
+  </button>
+
+  <a class="btn-getstarted" href="index.html#about">Get Started</a>
+</div>
 
 </div>
 </header>
@@ -344,6 +371,9 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <!-- Theme Switcher Engine -->
+  <script src="assets/js/theme-switcher.js"></script>
 
 </body>
 

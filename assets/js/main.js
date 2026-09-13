@@ -147,22 +147,29 @@
     let sort = isotopeItem.getAttribute('data-sort') ?? 'original-order';
 
     let initIsotope;
-    imagesLoaded(isotopeItem.querySelector('.isotope-container'), function() {
-      initIsotope = new Isotope(isotopeItem.querySelector('.isotope-container'), {
+    const container = isotopeItem.querySelector('.isotope-container');
+    imagesLoaded(container, function() {
+      initIsotope = new Isotope(container, {
         itemSelector: '.isotope-item',
         layoutMode: layout,
         filter: filter,
         sortBy: sort
       });
+      container._isotopeInstance = initIsotope;
+      isotopeItem._isotopeInstance = initIsotope;
+      window.dispatchEvent(new CustomEvent('isotope:ready', { detail: { isotope: initIsotope, container: container } }));
     });
 
     isotopeItem.querySelectorAll('.isotope-filters li').forEach(function(filters) {
       filters.addEventListener('click', function() {
         isotopeItem.querySelector('.isotope-filters .filter-active').classList.remove('filter-active');
         this.classList.add('filter-active');
-        initIsotope.arrange({
-          filter: this.getAttribute('data-filter')
-        });
+        if (initIsotope) {
+          initIsotope.arrange({
+            filter: this.getAttribute('data-filter')
+          });
+        }
+        window.dispatchEvent(new CustomEvent('portfolio:categoryFilterChange', { detail: { filter: this.getAttribute('data-filter') } }));
         if (typeof aosInit === 'function') {
           aosInit();
         }
