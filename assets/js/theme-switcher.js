@@ -32,11 +32,49 @@
     return getSystemPreference();
   }
 
+  // Trigger silky smooth cinematic cross-fade transition veil
+  function triggerSmoothFadeTransition(isDark) {
+    try {
+      let overlay = document.getElementById('theme-fade-transition-overlay');
+      if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'theme-fade-transition-overlay';
+        overlay.className = 'theme-fade-transition-overlay';
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(overlay);
+      }
+
+      // Set veil tint matching target state: pure black for Galaxy mode, warm white for Day mode
+      overlay.style.backgroundColor = isDark ? '#000000' : '#ffffff';
+
+      // Add temporary transition class to root
+      document.documentElement.classList.add('theme-transitioning');
+
+      // Trigger cross-fade pulse
+      overlay.classList.remove('is-active');
+      void overlay.offsetWidth; // Force reflow
+      overlay.classList.add('is-active');
+
+      setTimeout(() => {
+        if (overlay) {
+          overlay.classList.remove('is-active');
+        }
+        document.documentElement.classList.remove('theme-transitioning');
+      }, 420);
+    } catch (err) {
+      console.warn('Fade transition failed gracefully:', err);
+    }
+  }
+
   // Apply theme to the document and persist in localStorage
-  function applyTheme(theme, persist = true) {
+  function applyTheme(theme, persist = true, withFade = false) {
     const isDark = theme === THEME_DARK;
     const root = document.documentElement;
     const body = document.body;
+
+    if (withFade) {
+      triggerSmoothFadeTransition(isDark);
+    }
 
     root.setAttribute('data-theme', theme);
 
@@ -73,11 +111,17 @@
     }));
   }
 
-  // Toggle current theme between light and dark
-  function toggleTheme() {
+  // Toggle current theme between light and dark directly with smooth fade
+  function toggleTheme(triggerEl = null) {
     const currentTheme = document.documentElement.getAttribute('data-theme') || getPreferredTheme();
     const nextTheme = currentTheme === THEME_DARK ? THEME_LIGHT : THEME_DARK;
-    applyTheme(nextTheme, true);
+
+    if (triggerEl) {
+      triggerEl.classList.add('theme-toggle-active');
+      setTimeout(() => triggerEl.classList.remove('theme-toggle-active'), 350);
+    }
+
+    applyTheme(nextTheme, true, true);
     return nextTheme;
   }
 
@@ -87,20 +131,20 @@
     const buttons = document.querySelectorAll('.theme-toggle-btn, [data-theme-toggle]');
 
     buttons.forEach(button => {
-      button.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
-      button.setAttribute('title', isDark ? 'Switch to light theme (Shift+D)' : 'Switch to dark theme (Shift+D)');
+      button.setAttribute('aria-label', isDark ? 'Switch to Day Mode' : 'Switch to Night Mode (Galaxy Theme)');
+      button.setAttribute('title', isDark ? 'Switch to Day Mode (Shift+D)' : 'Switch to Night Mode - Galaxy Theme (Shift+D)');
       button.setAttribute('data-current-theme', theme);
       button.classList.toggle('is-dark', isDark);
 
       // Status text and icon if present inside nav link toggle
       const label = button.querySelector('.theme-toggle-label');
       if (label) {
-        label.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+        label.textContent = isDark ? 'Day Mode' : 'Night Mode (Galaxy Theme)';
       }
 
       const navIcon = button.querySelector('i');
       if (navIcon && !button.classList.contains('theme-toggle-btn')) {
-        navIcon.className = isDark ? 'bi bi-sun me-2' : 'bi bi-moon-stars me-2';
+        navIcon.className = isDark ? 'bi bi-sun-fill me-2 text-warning' : 'bi bi-moon-stars-fill me-2 text-info';
       }
     });
   }
@@ -111,12 +155,12 @@
     const currentTheme = getPreferredTheme();
     applyTheme(currentTheme, false);
 
-    // Bind click events on all toggle buttons
+    // Bind click events on all toggle buttons for direct immediate response
     document.addEventListener('click', function (e) {
       const toggleBtn = e.target.closest('.theme-toggle-btn, [data-theme-toggle]');
       if (toggleBtn) {
         e.preventDefault();
-        toggleTheme();
+        toggleTheme(toggleBtn);
       }
     });
 

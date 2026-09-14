@@ -63,50 +63,111 @@
 }
 
 /*--------------------------------------------------------------
-# Dark Theme Color Variables & Global Overrides
+# Dark Theme Color Variables & Global Overrides (Direct Galaxy Black)
 --------------------------------------------------------------*/
 :root[data-theme="dark"],
 body.dark-theme {
-  --background-color: #0c0a12;
-  --default-color: #cfc5d2;
-  --heading-color: #f8eff9;
+  --background-color: #000000;
+  --default-color: #d1d5db;
+  --heading-color: #ffffff;
   --accent-color: #ff5ca8;
   --accent-strong: #ff75b5;
-  --accent-soft: #2e1625;
-  --surface-color: rgba(24, 19, 32, 0.72);
-  --surface-strong: #191424;
+  --accent-soft: rgba(255, 92, 168, 0.16);
+  --surface-color: rgba(14, 11, 22, 0.85);
+  --surface-strong: #08060e;
   --contrast-color: #ffffff;
-  --shadow-soft: 0 16px 45px rgba(0, 0, 0, 0.55);
+  --shadow-soft: 0 16px 45px rgba(0, 0, 0, 0.88);
   --border-soft: rgba(255, 255, 255, 0.1);
-  --glow-pink: rgba(255, 92, 168, 0.18);
+  --glow-pink: rgba(255, 92, 168, 0.22);
 
-  --nav-color: #ded4e1;
+  --nav-color: #e5e7eb;
   --nav-hover-color: #ff75b5;
-  --nav-mobile-background-color: #120e1a;
-  --nav-dropdown-background-color: #191425;
-  --nav-dropdown-color: #ded4e1;
+  --nav-mobile-background-color: #000000;
+  --nav-dropdown-background-color: #08060f;
+  --nav-dropdown-color: #e5e7eb;
   --nav-dropdown-hover-color: #ff75b5;
 }
 
+html[data-theme="dark"],
 [data-theme="dark"] body,
 body.dark-theme {
   color: var(--default-color);
-  background: linear-gradient(135deg, #09080e 0%, #130d1c 45%, #0a0810 100%);
+  background-color: #000000 !important;
 }
 
 [data-theme="dark"] body::before,
-body.dark-theme::before {
-  background: rgba(255, 92, 168, 0.1);
-  opacity: 0.45;
-}
-
+body.dark-theme::before,
 [data-theme="dark"] body::after,
 body.dark-theme::after {
-  background: rgba(138, 43, 226, 0.12);
-  opacity: 0.45;
+  opacity: 0 !important;
+  pointer-events: none;
 }
 
-/* Smooth scroll */
+[data-theme="dark"] section,
+[data-theme="dark"] .section,
+body.dark-theme section,
+body.dark-theme .section {
+  background-color: transparent !important;
+}
+
+/*--------------------------------------------------------------
+# Smooth Theme Cross-Fade Transition Engine
+--------------------------------------------------------------*/
+html {
+  transition: background-color 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  scroll-behavior: smooth;
+}
+
+body {
+  transition: background-color 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.45s ease;
+}
+
+body::before,
+body::after {
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.6s ease;
+}
+
+/* Smooth transition on structural containers, cards & navigation */
+.header,
+.footer,
+.card,
+.portfolio-card,
+.portfolio-content,
+.service-item,
+.info-item,
+.resume-item,
+.stats-item,
+.section-title,
+.theme-toggle-btn,
+.github-stats-card,
+.github-metric-card,
+.github-calendar-heatmap-panel {
+  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.4s ease,
+              border-color 0.4s ease,
+              box-shadow 0.5s ease;
+}
+
+/* Fullscreen Cross-Fade Transition Veil for Cinematic Dissolve */
+.theme-fade-transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999998;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity;
+}
+
+.theme-fade-transition-overlay.is-active {
+  opacity: 0.35;
+}
+
 :root {
   scroll-behavior: smooth;
 }
@@ -292,6 +353,12 @@ h6 {
   box-shadow: 0 8px 22px rgba(255, 92, 168, 0.25);
   border-color: var(--accent-color);
   color: var(--accent-color);
+}
+
+.theme-toggle-btn:active,
+.theme-toggle-btn.theme-toggle-active {
+  transform: scale(0.92) !important;
+  transition-duration: 0.12s !important;
 }
 
 .theme-toggle-btn:focus-visible {
@@ -7376,7 +7443,7 @@ body.dark-theme .btn-action-github {
 }
 
 /*--------------------------------------------------------------
-# 3D Space Solar System, Projects Universe & GitHub Room
+# Interactive 3D Solar System & Cosmic Universe Arena
 --------------------------------------------------------------*/
 .space-solar-system {
   padding: 60px 0;
@@ -7392,16 +7459,16 @@ body.dark-theme .btn-action-github {
   top: 0;
   left: 0;
   right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.4), transparent);
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.6), rgba(56, 189, 248, 0.6), transparent);
 }
 
 .space-universe-wrapper {
   position: relative;
-  background: radial-gradient(circle at 50% 30%, #0d1527 0%, #050813 100%);
+  background: radial-gradient(circle at 50% 30%, #0c1322 0%, #040711 100%);
   border: 1px solid rgba(56, 189, 248, 0.25);
   border-radius: 20px;
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6), inset 0 0 60px rgba(56, 189, 248, 0.05);
+  box-shadow: 0 16px 54px rgba(0, 0, 0, 0.7), inset 0 0 60px rgba(56, 189, 248, 0.05);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -7426,20 +7493,23 @@ body.dark-theme .btn-action-github {
 }
 
 /* Top HUD Toolbar */
+.car-hud-top,
 .space-hud-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;
-  padding: 14px 20px;
-  background: rgba(10, 15, 29, 0.85);
+  padding: 12px 20px;
+  background: rgba(10, 15, 29, 0.88);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   z-index: 10;
 }
 
+.car-hud-left,
+.car-hud-right,
 .space-hud-left,
 .space-hud-right {
   display: flex;
@@ -7447,6 +7517,594 @@ body.dark-theme .btn-action-github {
   gap: 10px;
   flex-wrap: wrap;
 }
+
+.car-badge,
+.space-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #38bdf8;
+  padding: 4px 12px;
+  background: rgba(56, 189, 248, 0.1);
+  border-radius: 20px;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.car-badge-flame {
+  color: #ef4444;
+  animation: flamePulse 1.2s infinite alternate;
+}
+
+@keyframes flamePulse {
+  0% { transform: scale(1); filter: drop-shadow(0 0 2px #ef4444); }
+  100% { transform: scale(1.15); filter: drop-shadow(0 0 8px #f59e0b); }
+}
+
+.car-live-dot,
+.space-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 10px #22c55e;
+  animation: radarBlink 1.8s infinite;
+}
+
+/* Camera Mode Pills */
+.car-cam-pill-group,
+.space-mode-pill-group {
+  display: inline-flex;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.car-pill-btn,
+.space-pill-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.car-pill-btn:hover,
+.space-pill-btn:hover {
+  color: #f8fafc;
+}
+
+.car-pill-btn.active,
+.space-pill-btn.active {
+  background: #0284c7;
+  color: #ffffff;
+  box-shadow: 0 2px 10px rgba(2, 132, 199, 0.5);
+}
+
+/* Car Paint Color Swatches */
+.car-color-swatches {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.color-swatch-btn {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.color-swatch-btn:hover {
+  transform: scale(1.2);
+}
+
+.color-swatch-btn.active {
+  border-color: #ffffff;
+  transform: scale(1.15);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.swatch-red { background: #d32f2f; }
+.swatch-blue { background: #0284c7; }
+.swatch-black { background: #18181b; }
+.swatch-gold { background: #f59e0b; }
+.swatch-green { background: #10b981; }
+.swatch-white { background: #f8fafc; }
+
+/* Real-time Status Bar */
+.car-status-bar,
+.space-status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 20px;
+  background: rgba(6, 10, 20, 0.75);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 12px;
+  color: #94a3b8;
+  z-index: 5;
+}
+
+.car-status-ticker,
+.status-ticker-text {
+  color: #cbd5e1;
+  font-family: monospace;
+}
+
+.car-status-ticker.pulse-fade,
+.status-ticker-text.pulse-fade {
+  animation: textFlash 0.5s ease;
+}
+
+/* 3D Canvas Viewport */
+.car-canvas-viewport,
+.space-canvas-viewport {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  background: transparent;
+  overflow: hidden;
+}
+
+.space-solar-canvas-container {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.space-solar-canvas-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  outline: none;
+}
+
+/* Digital Cockpit Dashboard HUD (Top Left) */
+.cockpit-dashboard-overlay {
+  position: absolute;
+  top: 16px;
+  left: 18px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.speedo-card {
+  background: rgba(13, 20, 36, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 14px;
+  padding: 10px 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  width: fit-content;
+}
+
+.speedo-main {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.speed-number {
+  font-family: 'Mulish', monospace, sans-serif;
+  font-size: 42px;
+  font-weight: 900;
+  font-style: italic;
+  color: #ffffff;
+  line-height: 1;
+  text-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+  min-width: 68px;
+  text-align: right;
+}
+
+.speed-unit {
+  font-size: 13px;
+  font-weight: 700;
+  color: #38bdf8;
+  letter-spacing: 0.5px;
+}
+
+.gear-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+  padding-left: 10px;
+}
+
+.gear-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+.gear-val {
+  font-family: monospace;
+  font-size: 26px;
+  font-weight: 900;
+  color: #38bdf8;
+  line-height: 1;
+}
+
+/* Gauges Stack: RPM & Nitro */
+.hud-gauges-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: rgba(13, 20, 36, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 8px 12px;
+  width: 220px;
+}
+
+.gauge-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.gauge-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+.gauge-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.rpm-bar {
+  height: 100%;
+  width: 20%;
+  background: #38bdf8;
+  transition: width 0.08s ease, background 0.15s ease;
+  border-radius: 4px;
+}
+
+.nitro-bar {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #0284c7, #38bdf8, #f59e0b);
+  border-radius: 4px;
+  transition: width 0.08s ease;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+}
+
+.nitro-bar.nitro-pulsing {
+  animation: nitroPulse 0.3s infinite alternate;
+}
+
+@keyframes nitroPulse {
+  0% { filter: brightness(1); }
+  100% { filter: brightness(1.6) drop-shadow(0 0 8px #f59e0b); }
+}
+
+/* Lap Timer Badge */
+.lap-timer-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(13, 20, 36, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 10px;
+  padding: 6px 12px;
+  width: fit-content;
+}
+
+.lap-current {
+  display: flex;
+  flex-direction: column;
+}
+
+.lap-current-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: #22c55e;
+  text-transform: uppercase;
+}
+
+.lap-current-time {
+  font-family: monospace;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.1;
+}
+
+.lap-best {
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  padding-left: 8px;
+}
+
+.lap-best-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: #f59e0b;
+  text-transform: uppercase;
+}
+
+.lap-best-time {
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+/* Real-Time Minimap Radar (Top Right) */
+.car-minimap-overlay {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  z-index: 20;
+  background: rgba(13, 20, 36, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 14px;
+  padding: 8px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+.minimap-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+#car-minimap-canvas {
+  border-radius: 8px;
+  background: rgba(6, 10, 20, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Virtual On-Screen Driving Controls (Bottom Right) */
+.car-dpad-overlay,
+.space-walk-controls-overlay {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 25;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  user-select: none;
+}
+
+.car-dpad-panel,
+.walk-dpad-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: rgba(13, 20, 37, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 10px;
+  border-radius: 18px;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.car-dpad-btn,
+.dpad-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+  color: #f1f5f9;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  transition: all 0.12s ease;
+}
+
+.car-dpad-btn:hover,
+.car-dpad-btn:active,
+.dpad-btn:hover,
+.dpad-btn:active {
+  background: #0284c7;
+  color: #ffffff;
+  transform: scale(0.94);
+  border-color: #38bdf8;
+}
+
+.car-dpad-btn.btn-nitro,
+.dpad-btn.btn-sprint {
+  background: rgba(245, 158, 11, 0.25);
+  color: #fbbf24;
+  border-color: rgba(245, 158, 11, 0.5);
+}
+
+.car-dpad-btn.btn-nitro:active,
+.dpad-btn.btn-sprint:active {
+  background: #f59e0b;
+  color: #ffffff;
+}
+
+.car-dpad-btn.btn-drift {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.car-dpad-btn.btn-drift:active {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+/* Checkpoint Passed Notification Toast */
+.car-checkpoint-toast {
+  position: absolute;
+  top: 75px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px);
+  background: rgba(13, 20, 36, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(245, 158, 11, 0.6);
+  border-radius: 12px;
+  padding: 10px 18px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7), 0 0 20px rgba(245, 158, 11, 0.2);
+  z-index: 30;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.car-checkpoint-toast.show-toast {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Project Hologram Drawer */
+.car-project-drawer,
+.space-project-drawer {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  max-width: 400px;
+  width: calc(100% - 40px);
+  background: rgba(15, 23, 42, 0.94);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(56, 189, 248, 0.5);
+  border-radius: 16px;
+  padding: 18px;
+  z-index: 30;
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.7), 0 0 25px rgba(56, 189, 248, 0.2);
+  animation: drawerSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Bottom Instruction Footer Guide */
+.car-footer-guide,
+.space-footer-guide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 10px 20px;
+  background: rgba(10, 15, 29, 0.88);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 12px;
+  color: #94a3b8;
+  z-index: 10;
+}
+
+.guide-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.guide-item kbd {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #f8fafc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-family: inherit;
+}
+
+.nav-car-link,
+.nav-space-link {
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .car-canvas-viewport,
+  .space-canvas-viewport {
+    height: 500px;
+  }
+
+  .car-minimap-overlay {
+    top: 10px;
+    right: 10px;
+    transform: scale(0.85);
+    transform-origin: top right;
+  }
+
+  .speedo-card {
+    padding: 6px 12px;
+  }
+
+  .speed-number {
+    font-size: 32px;
+  }
+
+  .hud-gauges-stack {
+    width: 170px;
+  }
+
+  .car-dpad-btn,
+  .dpad-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 15px;
+  }
+
+  .car-project-drawer,
+  .space-project-drawer {
+    bottom: 10px;
+    left: 10px;
+    width: calc(100% - 20px);
+    padding: 14px;
+  }
+}
+
 
 .space-badge {
   display: inline-flex;

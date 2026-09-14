@@ -5,9 +5,9 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Mohit Lovanshi - Developer Portfolio</title>
-  <meta name="description" content="Portfolio website of Mohit Lovanshi, CSE student and full-stack developer showcasing projects with interactive 3D transitions, dynamic tech stacks, real-time GitHub stats, and theme switcher.">
+  <meta name="description" content="Portfolio website of Mohit Lovanshi, CSE student and full-stack developer showcasing projects with interactive 3D transitions, dynamic tech stacks, real-time GitHub stats with an annual contribution heatmap, interactive 3D Solar System universe, and day/galaxy theme switcher.">
   <meta property="og:title" content="Mohit Lovanshi - Developer Portfolio">
-  <meta property="og:description" content="Portfolio website of Mohit Lovanshi, CSE student and full-stack developer showcasing projects with interactive 3D transitions, dynamic tech stacks, real-time GitHub stats, and theme switcher.">
+  <meta property="og:description" content="Portfolio website of Mohit Lovanshi, CSE student and full-stack developer showcasing projects with interactive 3D transitions, dynamic tech stacks, real-time GitHub stats with an annual contribution heatmap, interactive 3D Solar System universe, and day/galaxy theme switcher.">
   <meta name="keywords" content="Mohit Lovanshi, portfolio, full-stack developer, frontend developer, web developer, CSE">
 
   <!-- Favicon -->
@@ -30,6 +30,19 @@
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- 3D Space Explorer - Galaxy Mode CSS -->
+  <link href="assets/css/galaxy-mode.css" rel="stylesheet">
+
+  <!-- Three.js ES Modules Import Map for 3D Galaxy Explorer -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
 
   <!-- Theme Preference Early Initialization to prevent Flash of Unstyled Content (FOUC) -->
   <script>
@@ -67,12 +80,11 @@
           <li><a href="#about">About</a></li>
           <li><a href="#resume">Resume</a></li>
           <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#space-solar-system" class="nav-space-link"><i class="bi bi-rocket-takeoff text-accent me-1"></i>3D Space</a></li>
           <li class="dropdown"><a href="#"><span>More</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#about">About</a></li>
               <li><a href="#portfolio">Portfolio</a></li>
-              <li><a href="#space-solar-system"><i class="bi bi-rocket-takeoff text-accent me-1"></i>3D Space Solar System</a></li>
+              <li><a href="#" class="solar-dropdown-link" onclick="if(window.spaceSolarExplorer){window.spaceSolarExplorer.show('planets');}return false;"><i class="bi bi-compass text-accent me-1"></i>3D Solar System (Projects)</a></li>
               <li><a href="#resume">Resume</a></li>
               <li><a href="#contact">Contact</a></li>
             </ul>
@@ -522,6 +534,11 @@
           A collection of academic, internship, and personal projects focused on web development, programming, and
           practical problem solving.
         </p>
+        <div class="mt-3">
+          <button type="button" class="btn btn-sm btn-outline-info rounded-pill px-3 py-1 shadow-sm" onclick="if(window.spaceSolarExplorer){window.spaceSolarExplorer.show('planets');}">
+            <i class="bi bi-compass me-1"></i>Explore 3D Solar System (Projects Universe)
+          </button>
+        </div>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -1302,270 +1319,6 @@
 
     </section><!-- /Contact Section -->
 
-    <!-- 3D Space Solar System, Projects Universe & GitHub Command Room with Rocket Spaceship -->
-    <section id="space-solar-system" class="space-solar-system section dark-background">
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <span class="description-title">3D Space Universe</span>
-        <h2>Solar System &amp; GitHub Room</h2>
-        <p>Explore Mohit's projects orbiting as celestial planets, pilot the 3D rocket spaceship with flight controls, and enter the orbital GitHub command room.</p>
-      </div><!-- End Section Title -->
-
-      <div class="container-fluid container-xl" data-aos="fade-up" data-aos-delay="100">
-        <div class="space-universe-wrapper" id="space-solar-system-wrapper">
-          
-          <!-- Top HUD Toolbar -->
-          <div class="space-hud-top">
-            <div class="space-hud-left">
-              <div class="space-badge">
-                <span class="space-live-dot"></span>
-                <i class="bi bi-rocket-takeoff-fill text-accent"></i>
-                <span class="space-badge-title">Interactive 3D Universe</span>
-              </div>
-              <!-- Camera / Navigation Modes -->
-              <div class="space-mode-pill-group" role="tablist">
-                <button type="button" class="space-pill-btn active" data-cam-mode="follow" title="Third-Person Rocket Spaceship Cockpit View">
-                  <i class="bi bi-rocket-takeoff me-1"></i> Rocket Spaceship
-                </button>
-                <button type="button" class="space-pill-btn" data-cam-mode="orbit" title="Free Orbit View of Solar System">
-                  <i class="bi bi-globe2 me-1"></i> Orbit View
-                </button>
-                <button type="button" class="space-pill-btn" data-cam-mode="github" title="Enter GitHub Space Station Command Room">
-                  <i class="bi bi-github me-1"></i> GitHub Room
-                </button>
-              </div>
-            </div>
-
-            <div class="space-hud-right">
-              <!-- Audio Synth Toggle -->
-              <button type="button" id="space-audio-toggle" class="space-action-btn" title="Toggle Cosmic Ambient Synthesizer">
-                <i class="bi bi-volume-up-fill"></i>
-                <span>Cosmic Audio</span>
-              </button>
-
-              <!-- Guided Tour -->
-              <button type="button" id="space-tour-btn" class="space-action-btn" title="Automated Tour of all Celestial Projects">
-                <i class="bi bi-compass me-1"></i>
-                <span>Auto Tour</span>
-              </button>
-
-              <!-- Speed Presets -->
-              <div class="space-speed-group" title="Orbit Speed Multiplier">
-                <button type="button" class="speed-btn active" data-orbit-speed="1">1x</button>
-                <button type="button" class="speed-btn" data-orbit-speed="2">2x</button>
-                <button type="button" class="speed-btn" data-orbit-speed="0">Pause</button>
-              </div>
-
-              <!-- Fullscreen Button -->
-              <button type="button" id="space-fullscreen-btn" class="space-action-btn icon-only" title="Toggle Fullscreen Universe" aria-label="Toggle Fullscreen">
-                <i class="bi bi-arrows-fullscreen"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- Real-Time Cosmic Status Bar -->
-          <div class="space-status-bar">
-            <div class="status-left">
-              <span class="status-radar-ping"></span>
-              <span id="space-status-ticker" class="status-ticker-text">Rocket Spaceship active • Use W/A/S/D or flight controls to pilot &amp; explore celestial repos</span>
-            </div>
-            <div class="status-right d-none d-md-flex">
-              <span class="status-metric"><i class="bi bi-sun text-warning me-1"></i>1 Sun Core</span>
-              <span class="status-metric"><i class="bi bi-planet text-info me-1"></i>5 GitHub Projects</span>
-              <span class="status-metric"><i class="bi bi-asterisk text-warning me-1"></i>Asteroid Belt</span>
-              <span class="status-metric"><i class="bi bi-building text-success me-1"></i>1 GitHub Station</span>
-            </div>
-          </div>
-
-          <!-- 3D Three.js Canvas Stage -->
-          <div class="space-canvas-viewport position-relative">
-            <div id="space-solar-canvas-container" class="space-solar-canvas-container">
-              <!-- Three.js Canvas renders dynamically here -->
-            </div>
-
-            <!-- On-Screen Virtual Flight D-Pad / Rocket Spaceship Movement Overlay -->
-            <div class="space-walk-controls-overlay">
-              <div class="walk-dpad-panel">
-                <div class="dpad-row">
-                  <button type="button" class="dpad-btn btn-up" data-dpad="forward" title="Thrust Forward (W / Up)">
-                    <i class="bi bi-chevron-up"></i>
-                  </button>
-                </div>
-                <div class="dpad-row dpad-middle">
-                  <button type="button" class="dpad-btn btn-left" data-dpad="left" title="Bank &amp; Steer Left (A / Left)">
-                    <i class="bi bi-chevron-left"></i>
-                  </button>
-                  <button type="button" class="dpad-btn btn-sprint" data-dpad="sprint" title="Hyperdrive Boost (Shift)">
-                    <i class="bi bi-lightning-charge-fill"></i>
-                  </button>
-                  <button type="button" class="dpad-btn btn-right" data-dpad="right" title="Bank &amp; Steer Right (D / Right)">
-                    <i class="bi bi-chevron-right"></i>
-                  </button>
-                </div>
-                <div class="dpad-row">
-                  <button type="button" class="dpad-btn btn-down" data-dpad="backward" title="Reverse Thrusters / Decelerate (S / Down)">
-                    <i class="bi bi-chevron-down"></i>
-                  </button>
-                </div>
-              </div>
-              <span class="dpad-label">Flight Controls</span>
-            </div>
-
-            <!-- Quick Waypoints Strip -->
-            <div class="space-waypoints-panel">
-              <span class="waypoints-title"><i class="bi bi-geo-alt-fill me-1 text-accent"></i>Celestial Destinations:</span>
-              <div class="waypoints-scroll">
-                <button type="button" class="waypoint-chip chip-github" data-waypoint="github">
-                  <i class="bi bi-github me-1"></i> GitHub Room
-                </button>
-                <button type="button" class="waypoint-chip chip-kisan" data-waypoint="kisan-procurement">
-                  <span class="chip-dot dot-emerald"></span> Kisan Procurement
-                </button>
-                <button type="button" class="waypoint-chip chip-property" data-waypoint="smart-property">
-                  <span class="chip-dot dot-azure"></span> Smart Property Finder
-                </button>
-                <button type="button" class="waypoint-chip chip-career" data-waypoint="student-career">
-                  <span class="chip-dot dot-cyan"></span> Student Career Guide
-                </button>
-                <button type="button" class="waypoint-chip chip-asteroid" data-waypoint="asteroid-belt">
-                  <i class="bi bi-asterisk text-warning me-1"></i> Asteroid Belt
-                </button>
-                <button type="button" class="waypoint-chip chip-auto" data-waypoint="autohub-deal">
-                  <span class="chip-dot dot-ruby"></span> AutoHub Car Deal
-                </button>
-                <button type="button" class="waypoint-chip chip-portfolio" data-waypoint="portfolio-3d">
-                  <span class="chip-dot dot-purple"></span> 3D Portfolio Universe
-                </button>
-                <button type="button" class="waypoint-chip chip-sun" data-waypoint="sun">
-                  <i class="bi bi-sun-fill text-warning me-1"></i> Core Sun
-                </button>
-              </div>
-            </div>
-
-            <!-- Project Hologram Inspection Drawer -->
-            <div id="space-project-drawer" class="space-project-drawer d-none">
-              <div class="drawer-header">
-                <div class="drawer-badge-wrap">
-                  <span class="drawer-planet-icon"><i class="bi bi-circle-fill"></i></span>
-                  <div>
-                    <span id="space-drawer-cat" class="drawer-cat">Category</span>
-                    <h4 id="space-drawer-title" class="drawer-title">Project Name</h4>
-                  </div>
-                </div>
-                <button type="button" class="btn-close-drawer" data-close-space-drawer aria-label="Close">
-                  <i class="bi bi-x-lg"></i>
-                </button>
-              </div>
-              <p id="space-drawer-desc" class="drawer-desc">Project description goes here...</p>
-              <div class="drawer-repo-meta mb-2 p-2 rounded d-flex align-items-center justify-content-between" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
-                <span class="small font-monospace text-info d-inline-flex align-items-center gap-1">
-                  <i class="bi bi-git"></i>
-                  <span id="space-drawer-repo-name">MohitLovanshi372/...</span>
-                </span>
-                <span class="badge bg-dark text-light border border-secondary small font-monospace"><i class="bi bi-diagram-2 me-1"></i>main</span>
-              </div>
-              <div class="drawer-tech-wrap">
-                <span class="drawer-tech-label">Architecture &amp; Tech Stack:</span>
-                <div id="space-drawer-tags" class="drawer-tags d-flex flex-wrap gap-1 mt-1"></div>
-              </div>
-              <div class="drawer-actions mt-3 d-flex gap-2">
-                <a id="space-drawer-demo-btn" href="#" target="_blank" rel="noopener" class="btn btn-sm btn-primary">
-                  <i class="bi bi-box-arrow-up-right me-1"></i> Live Demo
-                </a>
-                <a id="space-drawer-repo-btn" href="#" target="_blank" rel="noopener" class="btn btn-sm btn-outline-light">
-                  <i class="bi bi-github me-1"></i> GitHub Repo
-                </a>
-              </div>
-            </div>
-
-            <!-- GitHub Command Room Telemetry Modal -->
-            <div id="space-github-room-modal" class="space-github-room-modal d-none">
-              <div class="github-room-card">
-                <div class="room-card-header">
-                  <div class="d-flex align-items-center gap-2">
-                    <div class="room-octo-icon">
-                      <i class="bi bi-github"></i>
-                    </div>
-                    <div>
-                      <h4 class="room-title">GitHub Command Room</h4>
-                      <p class="room-subtitle">Orbital Space Station • MohitLovanshi372</p>
-                    </div>
-                  </div>
-                  <button type="button" class="btn-close-drawer" data-close-space-drawer aria-label="Close">
-                    <i class="bi bi-x-lg"></i>
-                  </button>
-                </div>
-
-                <div class="room-telemetry-grid">
-                  <div class="telemetry-card">
-                    <span class="telemetry-val text-success">106</span>
-                    <span class="telemetry-lbl">Annual Commits</span>
-                  </div>
-                  <div class="telemetry-card">
-                    <span class="telemetry-val text-warning">2 Days</span>
-                    <span class="telemetry-lbl">Current Streak</span>
-                  </div>
-                  <div class="telemetry-card">
-                    <span class="telemetry-val text-info">6 Days</span>
-                    <span class="telemetry-lbl">Peak Streak</span>
-                  </div>
-                  <div class="telemetry-card">
-                    <span class="telemetry-val text-accent">11 Peaks</span>
-                    <span class="telemetry-lbl">Best Day Record</span>
-                  </div>
-                </div>
-
-                <div class="room-terminal-feed">
-                  <div class="terminal-bar">
-                    <span class="term-dot red"></span>
-                    <span class="term-dot yellow"></span>
-                    <span class="term-dot green"></span>
-                    <span class="term-title">github-station-terminal:~/live-activity</span>
-                  </div>
-                  <pre class="terminal-body">
-<code><span class="text-success">$ git status --universe</span>
-On branch main (Mohit Lovanshi Space Station)
-Celestial projects synced: 5 active planets
-Real-time webhooks: Connected to api.github.com
-Spaceship status: Online &amp; Navigating Interplanetary Orbit
-Last push: Portfolio Heatmap &amp; 3D Transitions synced</code></pre>
-                </div>
-
-                <div class="room-actions d-flex justify-content-between align-items-center mt-3">
-                  <span class="text-muted small"><i class="bi bi-broadcast text-success me-1"></i>Station Telemetry Active</span>
-                  <a href="https://github.com/mohitlovanshi372" target="_blank" rel="noopener" class="btn btn-sm btn-outline-info">
-                    <i class="bi bi-github me-1"></i> Open GitHub Profile
-                  </a>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <!-- Bottom Instruction Footer -->
-          <div class="space-footer-guide">
-            <div class="guide-item">
-              <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> or <kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd>
-              <span>Steer &amp; thrust spaceship</span>
-            </div>
-            <div class="guide-item">
-              <kbd>Shift</kbd>
-              <span>Hyperdrive boost</span>
-            </div>
-            <div class="guide-item">
-              <i class="bi bi-cursor-fill me-1"></i>
-              <span>Click any planet or station to inspect</span>
-            </div>
-            <div class="guide-item">
-              <i class="bi bi-arrows-move me-1"></i>
-              <span>Drag to rotate camera view</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section><!-- /3D Space Solar System Section -->
-
   </main>
 
   <footer id="footer" class="footer">
@@ -1599,9 +1352,8 @@ Last push: Portfolio Heatmap &amp; 3D Transitions synced</code></pre>
             <li><a href="#about">About</a></li>
             <li><a href="#resume">Resume</a></li>
             <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#space-solar-system" class="space-useful-link active-highlight"><i class="bi bi-rocket-takeoff-fill text-accent me-1"></i>3D Solar System <span class="badge-space-pill">3D</span></a></li>
-            <li><a href="#space-solar-system" class="space-useful-link"><i class="bi bi-rocket-takeoff text-warning me-1"></i>Rocket Spaceship <span class="badge-space-pill">Ship</span></a></li>
-            <li><a href="#space-solar-system" class="space-useful-link"><i class="bi bi-github text-info me-1"></i>GitHub Room <span class="badge-space-pill">Room</span></a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#" class="space-useful-link" onclick="if(window.spaceSolarExplorer){window.spaceSolarExplorer.show('planets');}return false;"><i class="bi bi-compass text-info me-1"></i>3D Solar System <span class="badge-space-pill">3D</span></a></li>
           </ul>
         </div>
 
@@ -1663,14 +1415,76 @@ Last push: Portfolio Heatmap &amp; 3D Transitions synced</code></pre>
   <!-- Portfolio 3D Transitions & Spatial Showcase Engine -->
   <script src="assets/js/portfolio-3d.js"></script>
 
-  <!-- Three.js 3D WebGL Library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-  <!-- 3D Space Solar System, Projects Universe & Rocket Spaceship Engine -->
-  <script src="assets/js/space-solar-system.js"></script>
+  <!-- Galaxy Portfolio Dynamic Background Engine -->
+  <script src="assets/js/galaxy-bg.js"></script>
 
   <!-- Theme Switcher Engine -->
   <script src="assets/js/theme-switcher.js"></script>
+
+  <!-- ============================================================== -->
+  <!-- 3D Space Explorer - Galaxy Mode Experience (Night Mode Feature) -->
+  <!-- ============================================================== -->
+  <div id="galaxy-explorer-container" class="galaxy-explorer-container d-none" role="dialog" aria-label="3D Space Explorer Galaxy Mode">
+    <div id="loading">LOADING…</div>
+
+    <!-- Top Header Controls (Browse Portfolio, Fullscreen, Close) -->
+    <div class="galaxy-top-controls">
+      <button type="button" id="galaxy-btn-minimize" class="galaxy-top-btn" title="Browse Portfolio (G)">
+        <i class="bi bi-dash-lg"></i>
+        <span>Browse Portfolio</span>
+      </button>
+      <button type="button" id="galaxy-btn-fullscreen" class="galaxy-top-btn" title="Toggle Fullscreen" aria-label="Toggle Fullscreen">
+        <i class="bi bi-arrows-fullscreen"></i>
+      </button>
+      <button type="button" id="galaxy-btn-close" class="galaxy-top-btn btn-close-galaxy" title="Close Galaxy Explorer (Esc)" aria-label="Close">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div id="navBar">
+      <button type="button" class="nav-btn active" data-mode="galaxy">Galaxy</button>
+      <button type="button" class="nav-btn" data-mode="blackhole">Black Hole</button>
+      <button type="button" class="nav-btn" data-mode="planets">Solar System</button>
+    </div>
+
+    <!-- HUD Overlay -->
+    <div id="overlay">
+      <h1 id="overlayTitle">Space Explorer</h1>
+      <p id="overlaySub">Drag to rotate · Scroll to zoom</p>
+    </div>
+
+    <!-- Shape Morph Label (Galaxy Mode) -->
+    <div id="shapeLabel">Spiral Galaxy</div>
+
+    <!-- Color Palette Control Panel (Galaxy Mode) -->
+    <div id="colorPanel">
+      <div class="cp-row"><label>Core</label><input type="color" id="cpCore" value="#ffffff" aria-label="Core color" /></div>
+      <div class="cp-row"><label>Glow</label><input type="color" id="cpMid" value="#6ee7ff" aria-label="Glow color" /></div>
+      <div class="cp-row"><label>Edge</label><input type="color" id="cpEdge" value="#1450a8" aria-label="Edge color" /></div>
+      <div class="cp-presets">
+        <button type="button" class="cp-swatch" style="background:linear-gradient(90deg,#fff,#6ee7ff,#1450a8)" data-core="#ffffff" data-mid="#6ee7ff" data-edge="#1450a8" title="Cyan"></button>
+        <button type="button" class="cp-swatch" style="background:linear-gradient(90deg,#fff,#ff6ec7,#7a0e6e)" data-core="#ffffff" data-mid="#ff6ec7" data-edge="#7a0e6e" title="Pink"></button>
+        <button type="button" class="cp-swatch" style="background:linear-gradient(90deg,#fff,#b388ff,#3a0ca3)" data-core="#ffffff" data-mid="#b388ff" data-edge="#3a0ca3" title="Purple"></button>
+        <button type="button" class="cp-swatch" style="background:linear-gradient(90deg,#fff,#ffd166,#a85200)" data-core="#ffffff" data-mid="#ffd166" data-edge="#a85200" title="Gold"></button>
+        <button type="button" class="cp-swatch" style="background:linear-gradient(90deg,#fff,#6effa3,#0a6e3a)" data-core="#ffffff" data-mid="#6effa3" data-edge="#0a6e3a" title="Green"></button>
+        <button type="button" class="cp-swatch" style="background:linear-gradient(90deg,#fff,#ff6e6e,#7a0e0e)" data-core="#ffffff" data-mid="#ff6e6e" data-edge="#7a0e0e" title="Red"></button>
+      </div>
+    </div>
+
+    <!-- Planet Selection Menu (Solar System Mode) -->
+    <div id="planetMenu"></div>
+
+    <!-- Planet Details Card (Solar System Mode) -->
+    <div id="planetInfo">
+      <h2 id="piName">—</h2>
+      <div class="au" id="piAu">—</div>
+      <p id="piFact">—</p>
+    </div>
+  </div>
+
+  <!-- 3D Space Explorer Galaxy Mode Engine -->
+  <script type="module" src="assets/js/galaxy-mode.js"></script>
 
 </body>
 
